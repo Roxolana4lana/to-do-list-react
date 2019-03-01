@@ -14,10 +14,14 @@ export default class Main extends Component {
             tasks: [...prevState.tasks, { tasks:[] }],
         }));
     }
+   
     handleChange=e=>{
+        let tasks=[...this.state.tasks]
+        tasks[e.target.dataset.id] = e.target.value
         this.setState({
-          [e.target.name]:e.target.value  
+          tasks
         })
+        
     } 
     handleRemove =index =>{
         this.state.tasks.splice(index,1)
@@ -32,21 +36,23 @@ export default class Main extends Component {
       <div className='Main'>
         <div className='mainButtons'>
                 <h1>To do list</h1>
-                <button onClick={this.handleAdd}><i className="fas fa-plus"></i></button>
-                <button onClick={this.handleRemove}><i className="fas fa-minus"></i></button>
-                <button onClick={this.handleClear}><i className="fas fa-trash-alt"></i></button>  
+                <button className='myButton'onClick={this.handleAdd}><i className="fas fa-plus "style={{fontSize:'2rem'}}></i></button>
+                <button className='myButton' onClick={this.handleRemove}><i className="fas fa-minus " style={{ fontSize: '2rem' }}></i></button>
+                <button className='myButton' onClick={this.handleClear}><i className="fas fa-trash-alt " style={{ fontSize: '2rem' }}></i></button>  
                 {this.state.tasks.map((task,index)=>{
+                    let i = index+1
     
         return (
             <div key={index}>
-                    <label>Tusk number {index}</label>
+                <label className='myLabel'>Tusk &#8470; {i}</label>
                     <input
                         type='text'
                         value={this.state.task}
                         onChange={this.handleChange}
-                        name='task'
+                       
                         id={index}
                         data-id={index}
+                        className='myInput'
                         />
                 </div>
         )
